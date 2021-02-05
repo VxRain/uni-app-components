@@ -10,6 +10,7 @@
 </template>
 
 <script>
+let windowWidth = null; //可使用窗口宽度
 export default {
 	data() {
 		return {
@@ -26,10 +27,12 @@ export default {
 			default: '#d1d8de'
 		}
 	},
+	created() {
+		windowWidth = uni.getSystemInfoSync().windowWidth;
+	},
 	methods: {
 		scrollHandle(info) {
-			const { windowWidth } = uni.getSystemInfoSync();
-			const viewWidth = info.detail.scrollWidth - windowWidth;
+			let viewWidth = info.detail.scrollWidth - windowWidth;
 			let position = Number((info.detail.scrollLeft / viewWidth) * 100).toFixed(0);
 			this.scrollIndacator = position + '%';
 		}
